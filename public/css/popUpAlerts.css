@@ -1,0 +1,118 @@
+.model{
+    background-color: rgba(28, 30, 33, 0.8);
+    -webkit-backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+            backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index:999 !important;
+
+}
+
+.model-body{
+    width: 600px;
+    height: 230px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1c1e21;
+    border-radius: 20px;
+    border: 1px solid #5f6368;
+    text-align:center;
+
+}
+
+.model-body p{
+    font-size:22px;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.model-content{
+    height:100%;
+
+    position: relative;
+}
+
+.bottom-section{
+    position: absolute;
+    bottom: 0px;
+    padding:20px;
+    width: 100%;
+
+    text-align: end;
+
+}
+
+.bottom-section button {
+    width: 45px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding-top: 4px;
+
+}
+
+
+/* popup alerts */
+
+.popupAlertDiv{
+    position: fixed;
+
+    z-index: 25;
+    font-size: 18px;
+
+    width:350px
+}
+
+.failure-icon{
+    background-color: rgba(201, 71, 67, 0.842);
+    padding: 6px 8px !important
+}
+
+.success-icon{
+    background-color: rgba(31, 187, 67, 0.842);
+}
+
+.alert-icon{
+    padding: 6px;
+    border-radius: 30px;
+    font-size: 17px;
+    margin: 5px;
+    color: white
+}
+
+.popupAlert{
+    margin:5px;
+    background-color: rgba(17, 17, 17, 0.9);
+    -webkit-backdrop-filter: blur(2px) saturate(100%) contrast(45%) brightness(130%);
+            backdrop-filter: blur(2px) saturate(100%) contrast(45%) brightness(130%);
+    padding: 13px 13px;
+    border:none;
+    border-radius:12px;
+    color:whitesmoke;
+    cursor: pointer;
+    display: flex;
+    justify-items: center;
+    gap: 10px;
+}
+
+
+
+@media(max-width:785px){
+    .model-body{
+        width:300px
+    }
+}
+
+@media(max-width:400px){
+
+    .popupAlertDiv{
+        width:300px;
+        right: 8% !important;
+    }
+}
