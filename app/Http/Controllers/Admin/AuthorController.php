@@ -25,7 +25,7 @@ class AuthorController extends Controller
     {
 
         $data = $adminStatisticsRepository->search($req, app(Author::class));
-        AuthorResources::collection($data)->toArray($req);
+        $data= AuthorResources::collection($data)->toArray($req);
 
         if ($req->header("fetch"))
             return view('General.parts.dashboard.tables.authors', ["authors" => $data])->render();

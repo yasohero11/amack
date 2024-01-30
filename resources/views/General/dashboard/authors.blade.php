@@ -167,7 +167,7 @@
         async function deleteAuthor(id) {
             let loading = popupAlert.showLoadingAlert("Deleting Article ...")
             await AFetch({
-                method: "DELETE",
+                method: "POST",
                 url: `{{route("delete.authors" , ["id" => ":id"])}}`.replace(':id', id),
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"

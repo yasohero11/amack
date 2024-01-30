@@ -15,7 +15,9 @@ class AuthorRepository{
         $req["password"] = bcrypt($req->password);
         $author = Author::create($req->all());
         $author->assignRole("author");
-        $author->addMediaFromRequest("image")->toMediaCollection('person-image');
+        if($req->has("image"))
+            $author->addMediaFromRequest("image")->toMediaCollection('person-image');
+
         return $author;
     }
 

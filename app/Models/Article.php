@@ -18,6 +18,7 @@ class Article extends Model implements HasMedia
         "description",
         'type_id',
         "featured",
+        "active",
         "long",
         "lat",
         "era",

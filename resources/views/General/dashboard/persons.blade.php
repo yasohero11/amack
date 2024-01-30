@@ -168,7 +168,7 @@
         async function deleteCountry(id) {
             let loading = popupAlert.showLoadingAlert("Deleting Article ...")
             await AFetch({
-                method: "DELETE",
+                method: "POST",
                 url: `{{route("delete.persons" , ["id" => ":id"])}}`.replace(':id', id),
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"

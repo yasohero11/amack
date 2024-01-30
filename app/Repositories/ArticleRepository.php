@@ -37,7 +37,7 @@ class ArticleRepository{
     }
 
     public function getBannerArticles(){
-        return  ArticleResource::collection(Article::where("featured" , "1")->where("active" , "1")->get());
+            return  ArticleResource::collection(Article::where("featured" , "1")->where("active" , "1")->get());
     }
 
     public function getArticles(Request  $req){

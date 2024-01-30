@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToAuthorsTable extends Migration
+class CreateAuthorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,19 @@ class AddColumnsToAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('authors', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->string("role")->default("publisher")->nullable();
+            $table->string("address")->nullable();
+            $table->integer("age");
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->timestamps();
         });
     }
 
@@ -28,8 +36,6 @@ class AddColumnsToAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::table('authors', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('authors');
     }
 }

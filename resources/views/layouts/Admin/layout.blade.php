@@ -16,7 +16,7 @@
 
 </head>
 <body>
-@include('Admin.parts.admin_nav')
+@include('General.parts.admin_nav')
 @yield('content')
 </body>
 

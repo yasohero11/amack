@@ -57,26 +57,28 @@
             document.querySelector(`#p-${evt.target.name}`).innerText = evt.target.value
         })
     })
-
-    dialog.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-        }
-    });
-
-    dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) {
-            try{
-                if(closeModel)
-                    closeModel()
-                else
-                    dialog.close();
-            }catch (e) {
-                dialog.close();
+    if(dialog) {
+        dialog.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
             }
+        });
+        dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) {
+                try{
+                    if(closeModel)
+                        closeModel()
+                    else
+                        dialog.close();
+                }catch (e) {
+                    dialog.close();
+                }
 
-        }
-    });
+            }
+        });
+    }
+
+
 </script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

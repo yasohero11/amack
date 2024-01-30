@@ -24,7 +24,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => ["required", "unique:articles,title"],
+            "title" => ["required", "unique:articles,title,". $this->route('id')],
             "description" => ["required"],
         ];
     }

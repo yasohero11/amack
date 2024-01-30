@@ -20,7 +20,7 @@ class AuthController extends Controller
 
     public function executeLogin(Request $request){
         if(Auth::guard("admin")->attempt($request->only(["email","password"]))){
-            return redirect("/admin");
+            return redirect("/admin/dashboard");
         }
 
 
@@ -28,7 +28,10 @@ class AuthController extends Controller
     }
 
 
-
+    public function logout(){
+        Auth::logout();
+        return redirect()->to("/admin/login");
+    }
     public function register(AuthRegistrationRequest $req){
         $req["password"] = bcrypt($req->password);
 

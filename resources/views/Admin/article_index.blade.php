@@ -117,7 +117,7 @@
 
 
 
-        @include('Admin.parts.articles_list')
+        @include('General.parts.articles_list')
 
 
     </div>
@@ -157,7 +157,7 @@
          leftNumber = document.querySelector("#leftNumber");
          rightNumber = document.querySelector("#rightNumber");
          currPage =  document.querySelector(".curr-page");
-         loadingPage =  `@include('Admin.parts.loading_screen')`
+         loadingPage =  `@include('General.parts.loading_screen')`
          leftBtn.style.display = "none";
 
          function showLoadingPage(){

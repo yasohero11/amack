@@ -152,6 +152,8 @@
         const endDate = document.querySelector("#end_date")
         const factIndex = document.querySelector("#fact_index")
         const historyFact = document.querySelector("#history_fact")
+        const active = document.querySelector("#active")
+        const featured = document.querySelector("#featured")
 
 
         let selectedItem = -1;
@@ -162,6 +164,12 @@
             hideInvalidMessages()
             const data = new FormData(form);
             data.append("source_links" , tags.join(","))
+            if(!featured.checked)
+                data.append("featured", 0)
+
+            if(!active.checked)
+                data.append("active", 0)
+
             await AFetch({
                 method: "POST",
                 body: data,
@@ -191,6 +199,15 @@
            let loading = popupAlert.showLoadingAlert("Updating Article ...")
             hideInvalidMessages()
             const data = new FormData(form);
+           console.log("tagsssssssssssss")
+           console.log(tags.join(","))
+           data.append("source_links" , tags.join(","))
+           
+           if(!featured.checked)
+               data.append("featured", 0)
+
+           if(!active.checked)
+               data.append("active", 0)
            await AFetch({
                 method: "POST",
                 body: data,
@@ -198,10 +215,11 @@
                 onResponse: (response) => {
                     closeModel()
                     getArticles()
+                    popupAlert.showSuccessAlert("Article Updated")
                 },
-                onError : async(response) => {
-                    if(response.status === 422)
-                        validateResponse(await response.json())
+                onError : async(response, isValidationError) => {
+                    if(isValidationError)
+                        validateResponse(response)
                     else{
                         popupAlert.showFailureAlert("Ops!! Error Occurred")
                     }
@@ -216,9 +234,25 @@
             console.log(json)
             selectedItem = id || -1;
             if (json) {
+                let longLat
+                if(json["longlat"])
+                    longLat = json["longlat"].split(",")
+                if(json["source_links"])
+                    tags = json["source_links"].split(",")
+                createTag()
+                loc.value = json["location"]
+                era.value =  json["era"]
+                long.value = longLat[0]
+                lat.value = longLat[1]
+                startDate.value = json["start_date"]
+                endDate.value = json["end_date"]
+                historyFact.value = json["history_fact"]
+                factIndex.value = json["fact_index"]
+                document.querySelector("#p-fact_index").innerText = json["fact_index"]
                 titleInput.value = json["title"];
-
                 img.src = json["image"] ?? "";
+                active.checked = json["active"] === 1
+                featured.checked = json["featured"] === 1
                 descriptionInput.value = json["description"]
                 console.log(img.src)
                 if (img.src !== "") {
@@ -248,6 +282,8 @@
             endDate.value = ""
             era.value = ""
             tags = ["Article"]
+            active.checked = false
+            featured.checked = false
             document.querySelector("#p-fact_index").innerText = 0
             createTag()
             MiniDialog.close('cancel')
@@ -266,9 +302,9 @@
         }
 
         async function deleteArticle(id) {
-            let loading = popupAlert.showLoadingAlert("Updating Article ...")
+            let loading = popupAlert.showLoadingAlert("Deleting Article ...")
             await AFetch({
-                method: "DELETE",
+                method: "POST",
                 url: `{{route("delete.articles" , ["id" => ":id"])}}`.replace(':id', id),
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"

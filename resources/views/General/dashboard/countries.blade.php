@@ -1,6 +1,6 @@
 @extends('layouts.General.dashboard-layout')
 @section("title" , "Admin - Countries")
-@section("link")
+@section("links")
     <link href="{{asset("css/popUpAlerts.css")}}" rel="stylesheet"/>
 @endsection
 
@@ -46,6 +46,7 @@
         }
 
         async function updateCountry() {
+            let loading = popupAlert.showLoadingAlert("Updating Country ...")
             hideInvalidMessages()
             const data = new FormData(form);
 
@@ -112,7 +113,7 @@
         async function deleteCountry(id) {
             let loading = popupAlert.showLoadingAlert("Deleting Article ...")
             await AFetch({
-                method: "DELETE",
+                method: "POST",
                 url: `{{route("delete.countries" , ["id" => ":id"])}}`.replace(':id', id),
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"

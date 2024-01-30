@@ -26,7 +26,7 @@ class ArticleResource extends JsonResource
             "date" => $this->created_at,
             "last_updated" => $this->updated_at,
             "longlat" => $this->long . "," . $this->lat,
-
+            "source_links" => $this->source_links,
             "location" => $this->location,
             "history_fact" => $this->history_fact,
             "start_date" => $this->start_date,
